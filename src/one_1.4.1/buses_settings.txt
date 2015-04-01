@@ -1,5 +1,5 @@
 #
-# Default settings for the busses simulation
+# Settings for the busses simulation
 #
 
 ## Scenario settings
