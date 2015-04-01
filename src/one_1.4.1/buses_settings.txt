@@ -1,0 +1,45 @@
+#
+# Default settings for the busses simulation
+#
+
+## Scenario settings
+Scenario.name = busses_scenario
+Scenario.simulateConnections = true
+Scenario.updateInterval = 0.1
+# 43200s == 12h
+Scenario.endTime = 3600
+
+## Interface-specific settings:
+
+# High speed, long range, interface for the whole group
+wifi.type = SimpleBroadcastInterface
+wifi.transmitSpeed = 40M
+wifi.transmitRange = 250
+
+
+# Define 1 different node group
+Scenario.nrofHostGroups = 1
+
+## Group-specific settings:
+
+# Common settings for all groups
+Group.movementModel = ExternalMovement
+Group.router = FirstContactRouter
+Group.nrofInterfaces = 1
+Group.interface1 = wifi
+
+# group1 (buses) specific settings
+Group1.groupID = b
+Group1.nrofHosts = 823
+
+## Movement model settings
+MovementModel.worldSize = 37500, 57000
+ExternalMovement.file = data/bus_traces.txt
+ExternalMovement.nrofPreload = 10
+
+## Reports - all report names have to be valid report classes
+Report.nrofReports = 1
+Report.warmup = 0
+Report.reportDir = reports/
+Report.report1 = ContactsPositionsReport
+ContactsPositionsReport.granularity = 1.0

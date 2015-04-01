@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/one_1.4.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="/Users/ben/Downloads/one_1.4.1/lib/DTNConsoleConnection.jar"/>
+	<classpathentry kind="lib" path="/Users/ben/Downloads/one_1.4.1/lib/ECLA.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
