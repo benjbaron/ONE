@@ -41,5 +41,4 @@ ExternalMovement.nrofPreload = 10
 Report.nrofReports = 1
 Report.warmup = 0
 Report.reportDir = reports/
-Report.report1 = ContactsPositionsReport
-ContactsPositionsReport.granularity = 1.0
+Report.report1 = MeanContactsPositionsReport

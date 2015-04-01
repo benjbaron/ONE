@@ -10,10 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import core.Coord;
-import core.SettingsError;
-import core.Tuple;
-import core.Triplet;
+import core.*;
 
 
 /**
@@ -48,6 +45,7 @@ public class ExternalMovementReader {
 	private double maxX;
 	private double minY;
 	private double maxY;
+	private BoundingBox bb;
 	private boolean normalize;
 
 		
@@ -76,6 +74,7 @@ public class ExternalMovementReader {
 			maxX = lineScan.nextDouble();
 			minY = lineScan.nextDouble();
 			maxY = lineScan.nextDouble();
+			bb = new BoundingBox(minX, maxX, minY, maxY);
 		} catch (Exception e) {
 			throw new SettingsError("Invalid offset line '" + offsets + "'");
 		}
@@ -214,5 +213,7 @@ public class ExternalMovementReader {
 	public double getMinY() {
 		return minY;
 	}
+
+	public BoundingBox getBoundingBox() { return this.bb; }
 	
 }

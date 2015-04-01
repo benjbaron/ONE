@@ -6,12 +6,7 @@ package movement;
 
 import java.util.Random;
 
-import core.Coord;
-import core.DTNSim;
-import core.ModuleCommunicationBus;
-import core.Settings;
-import core.SimClock;
-import core.SimError;
+import core.*;
 
 /**
  * <P>Superclass for all movement models. All subclasses must contain at least a 
@@ -54,6 +49,7 @@ public abstract class MovementModel {
 
 	private int maxX;
 	private int maxY;
+	private BoundingBox bb;
 	
 	protected ModuleCommunicationBus comBus;
 
@@ -119,12 +115,13 @@ public abstract class MovementModel {
 		
 		minWaitTime = times[0];
 		maxWaitTime = times[1];
-		checkMinAndMaxSetting(WAIT_TIME,minWaitTime,maxWaitTime);
+		checkMinAndMaxSetting(WAIT_TIME, minWaitTime, maxWaitTime);
 		
 		settings.setNameSpace(MOVEMENT_MODEL_NS);
 		int [] worldSize = settings.getCsvInts(WORLD_SIZE,2);
 		this.maxX = worldSize[0];
 		this.maxY = worldSize[1];
+		this.bb = new BoundingBox(0.0,this.maxX,0.0,this.maxY);
 
 		settings.restoreNameSpace();
 	}
@@ -161,6 +158,7 @@ public abstract class MovementModel {
 		return this.maxY;
 	}
 
+	public BoundingBox getBoundingBox() { return this.bb; }
 	
 	/**
 	 * Generates and returns a speed value between min and max of the 

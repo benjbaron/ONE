@@ -4,6 +4,7 @@
  */
 package movement;
 
+import core.*;
 import input.ExternalMovementReader;
 
 import java.util.HashMap;
@@ -11,13 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-
-import core.Coord;
-import core.DTNSim;
-import core.Settings;
-import core.SimClock;
-import core.Tuple;
-import core.Triplet;
 
 /**
  * Movement model that uses external data of node locations.
@@ -63,7 +57,9 @@ public class ExternalMovement extends MovementModel {
 	private Path latestPath;
 	/** is this node active */
 	private boolean isActive;
-	
+	/** bounding box of the real world */
+	private BoundingBox bb;
+
 	static {
 		DTNSim.registerForReset(ExternalMovement.class.getCanonicalName());
 		reset();
@@ -82,13 +78,13 @@ public class ExternalMovement extends MovementModel {
 			idMapping = new HashMap<String, ExternalMovement>();
 			inputFileName = s.getSetting(MOVEMENT_FILE_S);
 			reader = new ExternalMovementReader(inputFileName);
-			
+
 			initLocations = reader.readNextMovements();
 			initTime = reader.getLastTimeStamp();
 			samplingInterval = -1;
 			lastPreloadTime = -1;
 
-					s.setNameSpace(EXTERNAL_MOVEMENT_NS);
+			s.setNameSpace(EXTERNAL_MOVEMENT_NS);
 			if (s.contains(NROF_PRELOAD_S)) {
 				nrofPreload = s.getInt(NROF_PRELOAD_S);
 				if (nrofPreload <= 0) {
@@ -241,7 +237,11 @@ public class ExternalMovement extends MovementModel {
 		return (int)(reader.getMaxY() - reader.getMinY()) + 1;
 	}
 
-	
+	@Override
+	public BoundingBox getBoundingBox() {
+		return reader.getBoundingBox();
+	}
+
 	@Override
 	public MovementModel replicate() {
 		return new ExternalMovement(this);

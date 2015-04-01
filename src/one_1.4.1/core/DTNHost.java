@@ -112,6 +112,8 @@ public class DTNHost implements Comparable<DTNHost> {
 		return this.movement.isActive();
 	}
 
+
+
 	/**
 	 * Set a router for this host
 	 * @param router The router to set
@@ -496,5 +498,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	public int compareTo(DTNHost h) {
 		return this.getAddress() - h.getAddress();
 	}
+
+	public BoundingBox getBoundingBox() { return this.movement.getBoundingBox(); }
 
 }
